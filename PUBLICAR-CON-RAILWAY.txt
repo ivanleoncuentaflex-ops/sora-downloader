@@ -1,0 +1,27 @@
+🚀 PUBLICAR CON RAILWAY (MÁS FÁCIL)
+
+PASO 1: Crear cuenta en Railway
+1. Abre: https://railway.app
+2. Haz clic en "Login"
+3. Selecciona "Login with GitHub" (o email si prefieres)
+4. Autoriza Railway
+
+PASO 2: Volver aquí y ejecutar
+Después de crear tu cuenta, dime "LISTO" y yo ejecutaré el comando para subir todo.
+
+---
+
+ALTERNATIVA: Método Manual (SIN COMANDOS)
+
+1. Ve a: https://railway.app
+2. Login
+3. Haz clic en "New Project"
+4. Selecciona "Empty Project"
+5. Haz clic en "+ New"
+6. Selecciona "GitHub Repo"
+7. Conecta tu GitHub
+8. Sube los archivos manualmente
+
+---
+
+¿Prefieres que te ayude con Railway o intentamos GitHub de nuevo?

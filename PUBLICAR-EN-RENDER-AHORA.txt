@@ -1,0 +1,132 @@
+🚀 PUBLICAR TU PÁGINA EN RENDER - PASO A PASO
+
+Tu código YA ESTÁ en GitHub: 
+✅ https://github.com/ivanleoncuentaflex-ops/sora-downloader
+
+Ahora solo falta conectarlo con Render:
+
+═══════════════════════════════════════════════════════════
+
+PASO 1: CREAR CUENTA EN RENDER
+═══════════════════════════════════════════════════════════
+
+1. Abre tu navegador
+2. Ve a: https://render.com
+3. Haz clic en "Get Started for Free"
+4. Selecciona "Sign in with GitHub"
+5. Autoriza Render para acceder a tu GitHub
+6. Completa tu perfil si te lo pide
+
+═══════════════════════════════════════════════════════════
+
+PASO 2: CREAR WEB SERVICE
+═══════════════════════════════════════════════════════════
+
+1. Una vez dentro de Render, haz clic en "New +" (arriba a la derecha)
+2. Selecciona "Web Service"
+3. Verás una lista de tus repositorios de GitHub
+4. Busca "sora-downloader"
+5. Haz clic en "Connect" al lado de ese repositorio
+
+═══════════════════════════════════════════════════════════
+
+PASO 3: CONFIGURAR EL SERVICIO
+═══════════════════════════════════════════════════════════
+
+Llena el formulario con estos datos EXACTOS:
+
+┌─────────────────────────────────────────────────────────┐
+│ Name: sora-downloader                                   │
+│                                                         │
+│ Region: Oregon (US West) - o el más cercano            │
+│                                                         │
+│ Branch: main                                            │
+│                                                         │
+│ Root Directory: (déjalo vacío)                          │
+│                                                         │
+│ Environment: Node                                       │
+│                                                         │
+│ Build Command: npm install                              │
+│                                                         │
+│ Start Command: npm start                                │
+│                                                         │
+│ Instance Type: Free                                     │
+└─────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════
+
+PASO 4: VARIABLES DE ENTORNO (IMPORTANTE)
+═══════════════════════════════════════════════════════════
+
+Antes de hacer clic en "Create Web Service", baja y busca:
+"Environment Variables"
+
+Haz clic en "Add Environment Variable" y agrega estas 2:
+
+Variable 1:
+- Key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
+- Value: true
+
+Variable 2:
+- Key: PUPPETEER_EXECUTABLE_PATH
+- Value: /usr/bin/chromium-browser
+
+═══════════════════════════════════════════════════════════
+
+PASO 5: CREAR Y ESPERAR
+═══════════════════════════════════════════════════════════
+
+1. Haz clic en "Create Web Service" (botón azul abajo)
+2. Render empezará a construir tu aplicación
+3. Verás logs en tiempo real
+4. Espera 10-15 minutos (es normal)
+5. Cuando veas "Live" en verde, ¡está listo!
+
+═══════════════════════════════════════════════════════════
+
+PASO 6: OBTENER TU URL
+═══════════════════════════════════════════════════════════
+
+1. En la parte superior verás tu URL
+2. Será algo como: https://sora-downloader.onrender.com
+3. Haz clic en esa URL para abrir tu página
+4. ¡LISTO! Tu página está en línea
+
+═══════════════════════════════════════════════════════════
+
+⚠️ NOTAS IMPORTANTES:
+═══════════════════════════════════════════════════════════
+
+1. El plan gratis de Render "duerme" después de 15 minutos sin uso
+2. Cuando alguien entra, se "despierta" (toma 30-60 segundos)
+3. Esto es NORMAL y no afecta el funcionamiento
+4. Tu página estará disponible 24/7
+
+═══════════════════════════════════════════════════════════
+
+🎉 DESPUÉS DE PUBLICAR:
+═══════════════════════════════════════════════════════════
+
+Comparte tu URL:
+
+🎬 Descarga Videos de Sora GRATIS
+👉 https://sora-downloader.onrender.com
+
+✅ Sin registro
+✅ Sin límites
+✅ 100% gratis
+✅ Máxima calidad
+
+═══════════════════════════════════════════════════════════
+
+🆘 SI HAY PROBLEMAS:
+═══════════════════════════════════════════════════════════
+
+1. Revisa los "Logs" en Render
+2. Verifica que las variables de entorno estén bien
+3. Asegúrate de que el Build Command sea: npm install
+4. Asegúrate de que el Start Command sea: npm start
+
+═══════════════════════════════════════════════════════════
+
+¿Necesitas ayuda con algún paso? ¡Dime en cuál estás!

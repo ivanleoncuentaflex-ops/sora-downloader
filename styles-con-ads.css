@@ -1,0 +1,243 @@
+/* Estilos base (mantén los que ya tienes) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    padding-bottom: 120px; /* Espacio para anuncio sticky */
+}
+
+/* ESTILOS PARA ANUNCIOS */
+
+.ad-container {
+    margin: 20px auto;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.ad-placeholder {
+    background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+    padding: 20px;
+    border-radius: 8px;
+    color: #999;
+    font-size: 14px;
+    border: 2px dashed #ccc;
+}
+
+/* Anuncio Superior */
+.ad-top {
+    max-width: 728px;
+    margin-bottom: 30px;
+}
+
+/* Anuncio Medio */
+.ad-middle {
+    max-width: 336px;
+    margin: 30px auto;
+}
+
+/* Anuncio Lateral (solo desktop) */
+.ad-sidebar {
+    display: none;
+}
+
+@media (min-width: 1200px) {
+    .ad-sidebar {
+        display: block;
+        position: fixed;
+        right: 20px;
+        top: 100px;
+        width: 300px;
+    }
+    
+    .container {
+        margin-right: 340px;
+    }
+}
+
+/* Anuncio Inferior Sticky */
+.ad-bottom-sticky {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+    z-index: 1000;
+    padding: 10px;
+    max-width: 100%;
+}
+
+.ad-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.ad-close:hover {
+    background: #cc0000;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .ad-top .ad-placeholder,
+    .ad-bottom-sticky .ad-placeholder {
+        font-size: 12px;
+        padding: 15px;
+    }
+    
+    .ad-middle {
+        max-width: 300px;
+    }
+}
+
+/* Mantén todos tus estilos originales aquí */
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #666;
+    font-size: 1.1em;
+}
+
+.download-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.url-input {
+    padding: 15px 20px;
+    font-size: 1em;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    transition: border-color 0.3s;
+}
+
+.url-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.download-btn {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+}
+
+.download-btn:active {
+    transform: translateY(0);
+}
+
+.download-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.status {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.status.hidden {
+    display: none;
+}
+
+.status.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.status.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.info-box {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.info-box p {
+    margin: 0 0 10px 0;
+    color: #856404;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+    }
+}

@@ -31,13 +31,27 @@ async function extractVideoWithPuppeteer(url) {
                 '--disable-blink-features=AutomationControlled',
                 '--disable-dev-shm-usage',
                 '--disable-accelerated-2d-canvas',
-                '--disable-gpu'
+                '--disable-gpu',
+                '--single-process',
+                '--no-zygote'
             ]
         };
         
-        // En producción, usar Chrome del sistema
+        // En producción, buscar Chrome en múltiples ubicaciones
         if (process.env.NODE_ENV === 'production') {
-            puppeteerOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium-browser';
+            const possiblePaths = [
+                '/usr/bin/chromium',
+                '/usr/bin/chromium-browser',
+                '/usr/bin/google-chrome',
+                process.env.PUPPETEER_EXECUTABLE_PATH
+            ];
+            
+            for (const path of possiblePaths) {
+                if (path) {
+                    puppeteerOptions.executablePath = path;
+                    break;
+                }
+            }
         }
         
         browser = await puppeteer.launch(puppeteerOptions);

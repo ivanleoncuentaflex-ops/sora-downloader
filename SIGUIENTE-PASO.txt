@@ -1,0 +1,31 @@
+🎯 SIGUIENTE PASO: CREAR REPOSITORIO EN GITHUB
+
+1. Abre tu navegador y ve a: https://github.com/new
+
+2. Llena el formulario:
+   - Repository name: sora-downloader
+   - Description: Descarga videos de Sora gratis
+   - Public (seleccionado)
+   - NO marques "Add a README file"
+   - NO marques "Add .gitignore"
+   - NO marques "Choose a license"
+
+3. Haz clic en "Create repository"
+
+4. En la página que aparece, COPIA la URL que dice:
+   "...or push an existing repository from the command line"
+   
+   Debería verse algo así:
+   https://github.com/TU-USUARIO/sora-downloader.git
+
+5. VUELVE AQUÍ y dime tu usuario de GitHub para continuar
+
+---
+
+ALTERNATIVA: Si no tienes cuenta de GitHub:
+
+1. Ve a https://github.com
+2. Haz clic en "Sign up"
+3. Crea tu cuenta (es gratis)
+4. Verifica tu email
+5. Luego sigue los pasos de arriba

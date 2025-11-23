@@ -1,0 +1,67 @@
+🎉 ¡TU CÓDIGO YA ESTÁ EN GITHUB!
+
+✅ Repositorio: https://github.com/ivanleoncuentaflex-ops/sora-downloader
+
+═══════════════════════════════════════════════════════════
+
+🚀 ÚLTIMO PASO: PUBLICAR EN RENDER (5 MINUTOS)
+
+═══════════════════════════════════════════════════════════
+
+1. Abre tu navegador y ve a:
+   👉 https://render.com
+
+2. Haz clic en "Get Started for Free"
+
+3. Selecciona "Sign in with GitHub"
+
+4. Autoriza Render para acceder a tu GitHub
+
+5. Una vez dentro, haz clic en "New +" (arriba a la derecha)
+
+6. Selecciona "Web Service"
+
+7. Busca y selecciona tu repositorio:
+   "sora-downloader"
+
+8. Configura así:
+   ┌─────────────────────────────────────┐
+   │ Name: sora-downloader               │
+   │ Environment: Node                   │
+   │ Build Command: npm install          │
+   │ Start Command: npm start            │
+   │ Instance Type: Free                 │
+   └─────────────────────────────────────┘
+
+9. Haz clic en "Create Web Service"
+
+10. Espera 5-10 minutos mientras se despliega
+
+11. ¡LISTO! Tu URL será:
+    https://sora-downloader.onrender.com
+
+═══════════════════════════════════════════════════════════
+
+📱 DESPUÉS DE PUBLICAR:
+
+Comparte tu URL:
+🎬 Descarga Videos de Sora GRATIS
+👉 https://sora-downloader.onrender.com
+
+✅ Sin registro
+✅ Sin límites
+✅ 100% gratis
+
+═══════════════════════════════════════════════════════════
+
+⚠️ NOTA IMPORTANTE:
+
+Si Puppeteer no funciona, agrega estas variables de entorno en Render:
+
+Environment → Add Environment Variable:
+- PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = true
+- PUPPETEER_EXECUTABLE_PATH = /usr/bin/chromium-browser
+
+═══════════════════════════════════════════════════════════
+
+¡FELICIDADES! Tu página estará disponible 24/7 para todo el mundo.

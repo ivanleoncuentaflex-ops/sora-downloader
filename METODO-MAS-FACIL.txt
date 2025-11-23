@@ -1,0 +1,61 @@
+🎯 MÉTODO MÁS FÁCIL - 3 OPCIONES
+
+═══════════════════════════════════════════════════════════
+
+OPCIÓN 1: VERCEL (ULTRA RÁPIDO - 2 MINUTOS)
+═══════════════════════════════════════════════════════════
+
+1. Ejecuta este comando:
+   vercel
+
+2. Te pedirá login - sigue las instrucciones en el navegador
+
+3. Responde las preguntas:
+   - Set up and deploy? Y
+   - Which scope? (tu cuenta)
+   - Link to existing project? N
+   - What's your project's name? sora-downloader
+   - In which directory? ./
+   - Want to override settings? N
+
+4. ¡LISTO! Te dará una URL como:
+   https://sora-downloader.vercel.app
+
+═══════════════════════════════════════════════════════════
+
+OPCIÓN 2: RENDER (MÁS ESTABLE)
+═══════════════════════════════════════════════════════════
+
+1. Intenta crear el repositorio en GitHub de nuevo:
+   https://github.com/new
+
+2. Si funciona:
+   - Nombre: sora-downloader
+   - Público
+   - Create repository
+
+3. Copia la URL y dime tu usuario de GitHub
+
+4. Yo ejecutaré los comandos para subir todo
+
+═══════════════════════════════════════════════════════════
+
+OPCIÓN 3: RAILWAY (INTERMEDIO)
+═══════════════════════════════════════════════════════════
+
+1. Ve a: https://railway.app
+2. Login con GitHub
+3. New Project → Empty Project
+4. Arrastra los archivos de tu carpeta
+5. Deploy automático
+
+═══════════════════════════════════════════════════════════
+
+¿CUÁL PREFIERES?
+
+Dime:
+- "VERCEL" para la opción 1 (más rápida)
+- "GITHUB" para la opción 2 (más estable)
+- "RAILWAY" para la opción 3 (intermedia)
+
+Y yo te guío paso a paso.

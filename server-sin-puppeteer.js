@@ -15,18 +15,27 @@ app.get('/', (req, res) => {
 });
 
 // Función para extraer video sin Puppeteer (más simple)
-async function extractVideoSimple(url) {
+async function extractVideoSimple(url, sessionToken = null) {
     try {
         console.log('🔍 Extrayendo video de:', url);
         
+        // Preparar headers
+        const headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Referer': 'https://chatgpt.com/'
+        };
+        
+        // Si hay session token, agregarlo como cookie
+        if (sessionToken) {
+            headers['Cookie'] = `__Secure-next-auth.session-token=${sessionToken}`;
+            console.log('🔐 Usando session token para autenticación');
+        }
+        
         // Hacer request directo a la página
         const response = await axios.get(url, {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Accept-Language': 'en-US,en;q=0.9',
-                'Referer': 'https://www.google.com/'
-            },
+            headers: headers,
             timeout: 15000
         });
 
@@ -92,7 +101,7 @@ async function extractVideoSimple(url) {
 
 // Endpoint de descarga
 app.post('/api/download', async (req, res) => {
-    const { url } = req.body;
+    const { url, sessionToken } = req.body;
     
     if (!url) {
         return res.status(400).json({ 
@@ -104,8 +113,8 @@ app.post('/api/download', async (req, res) => {
     console.log('📥 Solicitud:', url);
     
     try {
-        // Extraer URL del video
-        const videoUrl = await extractVideoSimple(url);
+        // Extraer URL del video (con session token si se proporcionó)
+        const videoUrl = await extractVideoSimple(url, sessionToken);
         
         // Descargar el video
         console.log('⬇️ Descargando video...');

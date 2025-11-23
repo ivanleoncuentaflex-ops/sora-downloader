@@ -49,13 +49,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function processDownload(url) {
         try {
+            // Obtener el session token si existe
+            const sessionToken = document.getElementById('sessionToken')?.value || '';
+            
             // Llamar al backend para descargar el video
             const response = await fetch('/api/download', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ url: url })
+                body: JSON.stringify({ 
+                    url: url,
+                    sessionToken: sessionToken 
+                })
             });
             
             if (!response.ok) {

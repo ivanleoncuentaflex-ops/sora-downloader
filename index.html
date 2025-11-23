@@ -39,6 +39,32 @@
                         placeholder="Pega aquí el enlace del video de Sora"
                         class="url-input"
                     >
+                    
+                    <details class="auth-details">
+                        <summary>🔐 Para videos privados (Click aquí)</summary>
+                        <p style="font-size: 0.9em; margin: 10px 0;">
+                            Si el video es de tu cuenta privada, necesitas proporcionar tu cookie de sesión:
+                        </p>
+                        <ol style="font-size: 0.85em; margin: 10px 0 10px 20px; line-height: 1.6;">
+                            <li>Ve a <a href="https://chatgpt.com" target="_blank">chatgpt.com</a> (donde estás logueado)</li>
+                            <li>Presiona <kbd>F12</kbd> para abrir DevTools</li>
+                            <li>Ve a la pestaña <strong>"Application"</strong> (o "Aplicación")</li>
+                            <li>En el menú izquierdo: <strong>Storage → Cookies → https://chatgpt.com</strong></li>
+                            <li>Busca la cookie: <code>__Secure-next-auth.session-token</code></li>
+                            <li>Copia su <strong>Value</strong> (el texto largo) y pégalo aquí abajo:</li>
+                        </ol>
+                        <input 
+                            type="password" 
+                            id="sessionToken" 
+                            placeholder="Pega tu session token aquí (opcional)"
+                            class="url-input"
+                            style="margin-top: 10px; font-size: 0.85em;"
+                        >
+                        <p style="font-size: 0.8em; color: #666; margin-top: 10px;">
+                            🔒 Tu token se usa solo para esta descarga y no se guarda en ningún lado.
+                        </p>
+                    </details>
+                    
                     <button id="downloadBtn" class="download-btn">
                         Descargar Video Gratis
                     </button>
@@ -49,14 +75,13 @@
                 <div class="instructions-box">
                     <h3>💡 Cómo funciona:</h3>
                     <ol>
-                        <li>Abre el video de Sora en otra pestaña</li>
-                        <li>Copia la URL completa</li>
-                        <li>Pégala aquí arriba</li>
+                        <li><strong>Videos públicos:</strong> Solo pega el enlace y descarga</li>
+                        <li><strong>Videos privados:</strong> Pega el enlace + tu session token (arriba)</li>
                         <li>Haz clic en "Descargar Video Gratis"</li>
-                        <li>El sistema intentará extraer el video automáticamente</li>
+                        <li>El video se descargará automáticamente</li>
                     </ol>
                     <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
-                        <strong>Nota:</strong> Si el método automático no funciona, usa el "Método Manual" arriba.
+                        <strong>Nota:</strong> Si no funciona, usa el "Método Manual" que siempre funciona.
                     </p>
                 </div>
             </div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 300px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        h3 {
+            margin: 0 0 15px 0;
+            color: #667eea;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        #status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <h3>🎥 Sora Downloader</h3>
+    <button id="downloadBtn">Descargar Video</button>
+    <div id="status"></div>
+    <script src="popup.js"></script>
+</body>
+</html>

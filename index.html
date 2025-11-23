@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargador de Videos Sora</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎥 Descargador de Videos Sora</h1>
+            <p>Descarga videos de Sora de forma gratuita</p>
+        </header>
+
+        <main>
+            <div class="info-box">
+                <p><strong>🎬 Descarga videos de Sora GRATIS</strong></p>
+                <p style="margin-top: 10px; font-size: 0.95em;">
+                    Solo pega el enlace del video y descárgalo en segundos. Sin registro, sin límites, 100% gratis.
+                </p>
+            </div>
+            
+            <div id="serverStatus" class="status info" style="display: none;">
+                Verificando servidor...
+            </div>
+
+            <div class="download-section">
+                <input 
+                    type="text" 
+                    id="videoUrl" 
+                    placeholder="Pega aquí el enlace del video de Sora"
+                    class="url-input"
+                >
+                <button id="downloadBtn" class="download-btn">
+                    Descargar Video Gratis
+                </button>
+            </div>
+
+            <div id="status" class="status hidden"></div>
+            
+            <div id="videoPreview" class="video-preview hidden">
+                <h3>Vista Previa</h3>
+                <div id="previewContent"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Herramienta gratuita para descargar videos de Sora</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

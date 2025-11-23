@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Sora Video Downloader",
+  "version": "1.0",
+  "description": "Descarga videos de Sora fácilmente",
+  "permissions": ["activeTab", "downloads"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://sora.chatgpt.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}

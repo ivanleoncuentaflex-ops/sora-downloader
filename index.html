@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descargador de Videos Sora</title>
+    <title>Descargador de Videos Sora - 100% Gratis</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,36 +17,117 @@
             <div class="info-box">
                 <p><strong>🎬 Descarga videos de Sora GRATIS</strong></p>
                 <p style="margin-top: 10px; font-size: 0.95em;">
-                    Solo pega el enlace del video y descárgalo en segundos. Sin registro, sin límites, 100% gratis.
+                    Método simple y rápido. Solo necesitas el enlace del video.
                 </p>
             </div>
-            
-            <div id="serverStatus" class="status info" style="display: none;">
-                Verificando servidor...
-            </div>
 
-            <div class="download-section">
-                <input 
-                    type="text" 
-                    id="videoUrl" 
-                    placeholder="Pega aquí el enlace del video de Sora"
-                    class="url-input"
-                >
-                <button id="downloadBtn" class="download-btn">
-                    Descargar Video Gratis
+            <div class="method-selector">
+                <button class="method-btn active" onclick="showMethod('direct')">
+                    📥 Descarga Directa
+                </button>
+                <button class="method-btn" onclick="showMethod('manual')">
+                    📋 Método Manual
                 </button>
             </div>
 
-            <div id="status" class="status hidden"></div>
-            
-            <div id="videoPreview" class="video-preview hidden">
-                <h3>Vista Previa</h3>
-                <div id="previewContent"></div>
+            <!-- MÉTODO 1: Descarga Directa -->
+            <div id="method-direct" class="method-content">
+                <div class="download-section">
+                    <input 
+                        type="text" 
+                        id="videoUrl" 
+                        placeholder="Pega aquí el enlace del video de Sora"
+                        class="url-input"
+                    >
+                    <button id="downloadBtn" class="download-btn">
+                        Descargar Video Gratis
+                    </button>
+                </div>
+
+                <div id="status" class="status hidden"></div>
+                
+                <div class="instructions-box">
+                    <h3>💡 Cómo funciona:</h3>
+                    <ol>
+                        <li>Abre el video de Sora en otra pestaña</li>
+                        <li>Copia la URL completa</li>
+                        <li>Pégala aquí arriba</li>
+                        <li>Haz clic en "Descargar Video Gratis"</li>
+                        <li>El sistema intentará extraer el video automáticamente</li>
+                    </ol>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
+                        <strong>Nota:</strong> Si el método automático no funciona, usa el "Método Manual" arriba.
+                    </p>
+                </div>
+            </div>
+
+            <!-- MÉTODO 2: Manual -->
+            <div id="method-manual" class="method-content" style="display: none;">
+                <div class="manual-instructions">
+                    <h3>📋 Método Manual (100% Funciona)</h3>
+                    <p>Este método siempre funciona porque usas tu propio navegador:</p>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Abre el video de Sora</h4>
+                            <p>Ve a <a href="https://sora.chatgpt.com" target="_blank">sora.chatgpt.com</a> y abre el video que quieres descargar</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Abre las Herramientas de Desarrollador</h4>
+                            <p>Presiona <kbd>F12</kbd> o <kbd>Ctrl+Shift+I</kbd> (Windows) / <kbd>Cmd+Option+I</kbd> (Mac)</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Ve a la pestaña "Network" (Red)</h4>
+                            <p>Haz clic en la pestaña "Network" o "Red" en las herramientas de desarrollador</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Filtra por "media" o "mp4"</h4>
+                            <p>En el campo de filtro, escribe "mp4" o selecciona "Media"</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Reproduce el video</h4>
+                            <p>Dale play al video. Verás aparecer una petición con extensión .mp4</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>Descarga el video</h4>
+                            <p>Haz clic derecho en la petición del video → "Open in new tab" → Click derecho en el video → "Guardar video como..."</p>
+                        </div>
+                    </div>
+
+                    <div class="success-box">
+                        <h4>✅ ¡Listo!</h4>
+                        <p>El video se descargará directamente a tu computadora en máxima calidad.</p>
+                    </div>
+                </div>
             </div>
         </main>
 
         <footer>
-            <p>Herramienta gratuita para descargar videos de Sora</p>
+            <p>Herramienta 100% gratuita para descargar videos de Sora</p>
+            <p style="font-size: 0.8em; margin-top: 10px; color: #999;">
+                Sin registro • Sin límites • Sin pagos
+            </p>
         </footer>
     </div>
 

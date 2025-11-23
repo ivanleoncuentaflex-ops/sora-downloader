@@ -4,11 +4,8 @@
   "description": "Backend para descargar videos de Sora",
   "main": "server.js",
   "scripts": {
-    "start": "node server-sin-puppeteer.js",
-    "dev": "nodemon server-sin-puppeteer.js",
-    "puppeteer": "node server-simple.js",
-    "universal": "node server-universal.js",
-    "old": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": ["sora", "video", "downloader"],
   "author": "",

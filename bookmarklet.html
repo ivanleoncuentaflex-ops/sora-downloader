@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmarklet - Descargador de Sora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+        }
+        .bookmarklet-btn {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 40px;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 30px auto;
+            max-width: 400px;
+        }
+        .instructions {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .instructions h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .instructions ol {
+            line-height: 1.8;
+        }
+        .success-box {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎥 Descargador de Sora - Bookmarklet</h1>
+        
+        <div class="instructions">
+            <h3>📋 Instrucciones (Solo 2 pasos):</h3>
+            <ol>
+                <li><strong>Arrastra este botón a tu barra de marcadores:</strong></li>
+            </ol>
+        </div>
+
+        <a href="javascript:(function(){const videos=document.querySelectorAll('video');if(videos.length===0){alert('No se encontró ningún video en esta página');return;}const video=videos[0];let videoUrl=video.src||video.currentSrc;if(!videoUrl){const sources=video.querySelectorAll('source');if(sources.length>0){videoUrl=sources[0].src;}}if(videoUrl){const a=document.createElement('a');a.href=videoUrl;a.download='sora-video-'+Date.now()+'.mp4';document.body.appendChild(a);a.click();document.body.removeChild(a);alert('✅ Descarga iniciada!');}else{alert('❌ No se pudo encontrar la URL del video');}})();" class="bookmarklet-btn">
+            ⬇️ Descargar Video de Sora
+        </a>
+
+        <div class="instructions">
+            <ol start="2">
+                <li><strong>Cuando estés en Sora viendo un video:</strong>
+                    <ul>
+                        <li>Haz clic en el marcador que acabas de agregar</li>
+                        <li>El video se descargará automáticamente</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="success-box">
+            <h3>✅ Ventajas del Bookmarklet:</h3>
+            <ul>
+                <li>✅ Funciona con TODOS los videos (públicos y privados)</li>
+                <li>✅ No requiere instalar nada</li>
+                <li>✅ Un solo click para descargar</li>
+                <li>✅ 100% gratis y seguro</li>
+                <li>✅ Funciona en cualquier navegador</li>
+            </ul>
+        </div>
+
+        <div class="instructions">
+            <h3>💡 ¿Cómo agregar a marcadores?</h3>
+            <p><strong>Chrome/Edge:</strong> Arrastra el botón morado a la barra de marcadores (debajo de la barra de direcciones)</p>
+            <p><strong>Firefox:</strong> Arrastra el botón morado a la barra de herramientas de marcadores</p>
+            <p><strong>Safari:</strong> Arrastra el botón morado a la barra de favoritos</p>
+        </div>
+    </div>
+</body>
+</html>

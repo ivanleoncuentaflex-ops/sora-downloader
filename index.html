@@ -237,11 +237,10 @@
             downloadBtn.disabled = true;
             downloadBtn.textContent = 'Procesando...';
             warningBox.classList.remove('show');
-            showStatus('🔍 Extrayendo video desde tu navegador...\nEsto puede tomar unos segundos', 'info');
+            showStatus('🔐 Pasando verificación de Cloudflare...\nEsto puede tomar 15-30 segundos', 'info');
             
             try {
                 // Enviar al servidor para procesamiento automático
-                showStatus('🤖 Procesando automáticamente...\nEsto puede tomar 20-40 segundos', 'info');
                 
                 const response = await fetch('/api/download', {
                     method: 'POST',

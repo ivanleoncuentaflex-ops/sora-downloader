@@ -3,155 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descargador de Videos Sora - 100% Gratis</title>
+    <title>Descargador de Videos Sora - Gratis</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>🎥 Descargador de Videos Sora</h1>
-            <p>Descarga videos de Sora de forma gratuita</p>
+            <p>La forma más fácil de descargar videos de Sora</p>
         </header>
 
         <main>
-            <div class="info-box">
-                <p><strong>🎬 Descarga videos de Sora GRATIS</strong></p>
-                <p style="margin-top: 10px; font-size: 0.95em;">
-                    Método simple y rápido. Solo necesitas el enlace del video.
-                </p>
-            </div>
-
-            <div class="method-selector">
-                <button class="method-btn active" onclick="showMethod('direct')">
-                    📥 Descarga Directa
-                </button>
-                <button class="method-btn" onclick="showMethod('manual')">
-                    📋 Método Manual
-                </button>
-            </div>
-
-            <!-- MÉTODO 1: Descarga Directa -->
-            <div id="method-direct" class="method-content">
+            <div class="simple-box">
+                <h2>📥 Descarga Directa</h2>
+                <p>Pega el enlace y descarga en segundos</p>
+                
                 <div class="download-section">
                     <input 
                         type="text" 
                         id="videoUrl" 
-                        placeholder="Pega aquí el enlace del video de Sora"
+                        placeholder="https://sora.chatgpt.com/p/..."
                         class="url-input"
                     >
-                    
-                    <details class="auth-details">
-                        <summary>🔐 Para videos privados (Click aquí)</summary>
-                        <p style="font-size: 0.9em; margin: 10px 0;">
-                            Si el video es de tu cuenta privada, necesitas proporcionar tu cookie de sesión:
-                        </p>
-                        <ol style="font-size: 0.85em; margin: 10px 0 10px 20px; line-height: 1.6;">
-                            <li>Ve a <a href="https://chatgpt.com" target="_blank">chatgpt.com</a> (donde estás logueado)</li>
-                            <li>Presiona <kbd>F12</kbd> para abrir DevTools</li>
-                            <li>Ve a la pestaña <strong>"Application"</strong> (o "Aplicación")</li>
-                            <li>En el menú izquierdo: <strong>Storage → Cookies → https://chatgpt.com</strong></li>
-                            <li>Busca la cookie: <code>__Secure-next-auth.session-token</code></li>
-                            <li>Copia su <strong>Value</strong> (el texto largo) y pégalo aquí abajo:</li>
-                        </ol>
-                        <input 
-                            type="password" 
-                            id="sessionToken" 
-                            placeholder="Pega tu session token aquí (opcional)"
-                            class="url-input"
-                            style="margin-top: 10px; font-size: 0.85em;"
-                        >
-                        <p style="font-size: 0.8em; color: #666; margin-top: 10px;">
-                            🔒 Tu token se usa solo para esta descarga y no se guarda en ningún lado.
-                        </p>
-                    </details>
-                    
                     <button id="downloadBtn" class="download-btn">
-                        Descargar Video Gratis
+                        ⬇️ Descargar Ahora
                     </button>
                 </div>
 
                 <div id="status" class="status hidden"></div>
-                
-                <div class="instructions-box">
-                    <h3>💡 Cómo funciona:</h3>
-                    <ol>
-                        <li><strong>Videos públicos:</strong> Solo pega el enlace y descarga</li>
-                        <li><strong>Videos privados:</strong> Pega el enlace + tu session token (arriba)</li>
-                        <li>Haz clic en "Descargar Video Gratis"</li>
-                        <li>El video se descargará automáticamente</li>
-                    </ol>
-                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
-                        <strong>Nota:</strong> Si no funciona, usa el "Método Manual" que siempre funciona.
-                    </p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="icon">✅</div>
+                    <h3>100% Gratis</h3>
+                    <p>Sin registro ni pagos</p>
+                </div>
+                <div class="info-card">
+                    <div class="icon">⚡</div>
+                    <h3>Súper Rápido</h3>
+                    <p>Descarga en segundos</p>
+                </div>
+                <div class="info-card">
+                    <div class="icon">🔒</div>
+                    <h3>Seguro</h3>
+                    <p>Sin virus ni malware</p>
                 </div>
             </div>
 
-            <!-- MÉTODO 2: Manual -->
-            <div id="method-manual" class="method-content" style="display: none;">
-                <div class="manual-instructions">
-                    <h3>📋 Método Manual (100% Funciona)</h3>
-                    <p>Este método siempre funciona porque usas tu propio navegador:</p>
-                    
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Abre el video de Sora</h4>
-                            <p>Ve a <a href="https://sora.chatgpt.com" target="_blank">sora.chatgpt.com</a> y abre el video que quieres descargar</p>
-                        </div>
+            <div class="how-to">
+                <h3>🚀 Cómo usar:</h3>
+                <div class="steps">
+                    <div class="step-simple">
+                        <span class="step-num">1</span>
+                        <p>Copia el enlace del video de Sora</p>
                     </div>
+                    <div class="step-simple">
+                        <span class="step-num">2</span>
+                        <p>Pégalo en el campo de arriba</p>
+                    </div>
+                    <div class="step-simple">
+                        <span class="step-num">3</span>
+                        <p>Haz clic en "Descargar Ahora"</p>
+                    </div>
+                    <div class="step-simple">
+                        <span class="step-num">4</span>
+                        <p>¡Listo! El video se descargará</p>
+                    </div>
+                </div>
+            </div>
 
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Abre las Herramientas de Desarrollador</h4>
-                            <p>Presiona <kbd>F12</kbd> o <kbd>Ctrl+Shift+I</kbd> (Windows) / <kbd>Cmd+Option+I</kbd> (Mac)</p>
-                        </div>
-                    </div>
+            <div class="extension-promo">
+                <h3>💡 ¿Quieres descargar aún más fácil?</h3>
+                <p>Instala nuestra extensión de Chrome y descarga con un solo click desde Sora</p>
+                <button class="extension-btn" onclick="showExtensionInfo()">
+                    🔌 Ver Extensión de Chrome
+                </button>
+            </div>
 
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>Ve a la pestaña "Network" (Red)</h4>
-                            <p>Haz clic en la pestaña "Network" o "Red" en las herramientas de desarrollador</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>Filtra por "media" o "mp4"</h4>
-                            <p>En el campo de filtro, escribe "mp4" o selecciona "Media"</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>Reproduce el video</h4>
-                            <p>Dale play al video. Verás aparecer una petición con extensión .mp4</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">6</div>
-                        <div class="step-content">
-                            <h4>Descarga el video</h4>
-                            <p>Haz clic derecho en la petición del video → "Open in new tab" → Click derecho en el video → "Guardar video como..."</p>
-                        </div>
-                    </div>
-
-                    <div class="success-box">
-                        <h4>✅ ¡Listo!</h4>
-                        <p>El video se descargará directamente a tu computadora en máxima calidad.</p>
-                    </div>
+            <div id="extensionInfo" class="extension-info hidden">
+                <h3>📦 Extensión de Chrome</h3>
+                <p>Con la extensión puedes:</p>
+                <ul>
+                    <li>✅ Descargar con un solo click desde Sora</li>
+                    <li>✅ Funciona con TODOS tus videos (públicos y privados)</li>
+                    <li>✅ No necesitas copiar y pegar enlaces</li>
+                    <li>✅ 100% gratis y seguro</li>
+                </ul>
+                <div class="extension-install">
+                    <h4>Instalación (2 minutos):</h4>
+                    <ol>
+                        <li>Descarga la extensión: <a href="extension.zip" download>extension.zip</a></li>
+                        <li>Descomprime el archivo</li>
+                        <li>Abre Chrome y ve a <code>chrome://extensions/</code></li>
+                        <li>Activa "Modo de desarrollador" (arriba a la derecha)</li>
+                        <li>Haz clic en "Cargar extensión sin empaquetar"</li>
+                        <li>Selecciona la carpeta descomprimida</li>
+                        <li>¡Listo! Ve a Sora y verás un botón de descarga</li>
+                    </ol>
                 </div>
             </div>
         </main>
 
         <footer>
-            <p>Herramienta 100% gratuita para descargar videos de Sora</p>
+            <p>🎬 Descargador de Videos Sora - 100% Gratis</p>
             <p style="font-size: 0.8em; margin-top: 10px; color: #999;">
-                Sin registro • Sin límites • Sin pagos
+                Sin límites • Sin registro • Sin pagos
             </p>
         </footer>
     </div>

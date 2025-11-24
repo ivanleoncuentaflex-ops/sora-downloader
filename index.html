@@ -86,6 +86,7 @@
             border-radius: 10px;
             text-align: center;
             display: none;
+            white-space: pre-line;
         }
         
         .status.show { display: block; }
@@ -102,7 +103,7 @@
         
         .info-box h3 {
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .step {
@@ -125,11 +126,32 @@
             flex-shrink: 0;
         }
         
+        .step p {
+            color: #666;
+        }
+        
         footer {
             text-align: center;
             margin-top: 30px;
             color: #999;
             font-size: 0.9em;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .warning-box.show {
+            display: block;
+        }
+        
+        .warning-box p {
+            color: #856404;
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -149,6 +171,15 @@
         
         <div id="status" class="status"></div>
         
+        <div id="warningBox" class="warning-box">
+            <p><strong>⚠️ Limitación Técnica:</strong></p>
+            <p>Sora requiere autenticación de ChatGPT para todos los videos.</p>
+            <p style="margin-top: 10px;"><strong>Solución simple:</strong></p>
+            <p>1. Abre el video en Sora</p>
+            <p>2. Mantén presionado el video</p>
+            <p>3. Selecciona "Descargar video"</p>
+        </div>
+        
         <div class="info-box">
             <h3>📋 Cómo usar:</h3>
             <div class="step">
@@ -161,11 +192,11 @@
             </div>
             <div class="step">
                 <span class="step-num">3</span>
-                <p>Haz click en "Descargar Video"</p>
+                <p>Click en "Descargar Video"</p>
             </div>
             <div class="step">
                 <span class="step-num">4</span>
-                <p>¡Espera y el video se descargará!</p>
+                <p>¡El video se descargará!</p>
             </div>
         </div>
         
@@ -178,6 +209,7 @@
         const urlInput = document.getElementById('videoUrl');
         const downloadBtn = document.getElementById('downloadBtn');
         const statusDiv = document.getElementById('status');
+        const warningBox = document.getElementById('warningBox');
 
         downloadBtn.addEventListener('click', handleDownload);
         
@@ -202,7 +234,8 @@
 
             downloadBtn.disabled = true;
             downloadBtn.textContent = 'Procesando...';
-            showStatus('🔍 Buscando el video...', 'info');
+            warningBox.classList.remove('show');
+            showStatus('🔍 Extrayendo video...\nEsto puede tomar 10-30 segundos', 'info');
             
             try {
                 const response = await fetch('/api/download', {
@@ -218,12 +251,12 @@
                     throw new Error(error.error || 'Error al descargar');
                 }
                 
-                showStatus('⬇️ Descargando video...', 'info');
+                showStatus('⬇️ Descargando video...\nPor favor espera', 'info');
                 
                 const blob = await response.blob();
                 
                 if (blob.size < 1000) {
-                    throw new Error('No se pudo descargar el video. Intenta con otro enlace.');
+                    throw new Error('PROTECTED_VIDEO');
                 }
                 
                 const downloadUrl = window.URL.createObjectURL(blob);
@@ -239,7 +272,13 @@
                 
             } catch (error) {
                 console.error('Error:', error);
-                showStatus('❌ ' + error.message, 'error');
+                
+                if (error.message === 'PROTECTED_VIDEO' || error.message.includes('privado') || error.message.includes('autenticación')) {
+                    showStatus('❌ Este video está protegido', 'error');
+                    warningBox.classList.add('show');
+                } else {
+                    showStatus('❌ ' + error.message, 'error');
+                }
             } finally {
                 downloadBtn.disabled = false;
                 downloadBtn.textContent = '⬇️ Descargar Video';

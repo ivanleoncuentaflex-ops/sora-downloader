@@ -3,112 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descargador de Videos Sora - Gratis</title>
+    <title>Descargador de Videos Sora - 100% Gratis</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>🎥 Descargador de Videos Sora</h1>
-            <p>La forma más fácil de descargar videos de Sora</p>
+            <p>100% Gratis • Funciona con TODOS los videos</p>
         </header>
 
         <main>
-            <div class="simple-box">
-                <h2>📥 Descarga Directa</h2>
-                <p>Pega el enlace y descarga en segundos</p>
+            <!-- MÉTODO PRINCIPAL: BOOKMARKLET -->
+            <div class="hero-box">
+                <h2>⭐ Descarga en 1 Click</h2>
+                <p style="font-size: 1.1em; margin: 15px 0;">
+                    Arrastra este botón a tu barra de marcadores y descarga cualquier video de Sora con un solo click
+                </p>
                 
-                <div class="download-section">
-                    <input 
-                        type="text" 
-                        id="videoUrl" 
-                        placeholder="https://sora.chatgpt.com/p/..."
-                        class="url-input"
-                    >
-                    <button id="downloadBtn" class="download-btn">
-                        ⬇️ Descargar Ahora
-                    </button>
-                </div>
-
-                <div id="status" class="status hidden"></div>
-            </div>
-
-            <div class="info-grid">
-                <div class="info-card">
-                    <div class="icon">✅</div>
-                    <h3>100% Gratis</h3>
-                    <p>Sin registro ni pagos</p>
-                </div>
-                <div class="info-card">
-                    <div class="icon">⚡</div>
-                    <h3>Súper Rápido</h3>
-                    <p>Descarga en segundos</p>
-                </div>
-                <div class="info-card">
-                    <div class="icon">🔒</div>
-                    <h3>Seguro</h3>
-                    <p>Sin virus ni malware</p>
-                </div>
-            </div>
-
-            <div class="how-to">
-                <h3>🚀 Cómo usar:</h3>
-                <div class="steps">
-                    <div class="step-simple">
-                        <span class="step-num">1</span>
-                        <p>Copia el enlace del video de Sora</p>
-                    </div>
-                    <div class="step-simple">
-                        <span class="step-num">2</span>
-                        <p>Pégalo en el campo de arriba</p>
-                    </div>
-                    <div class="step-simple">
-                        <span class="step-num">3</span>
-                        <p>Haz clic en "Descargar Ahora"</p>
-                    </div>
-                    <div class="step-simple">
-                        <span class="step-num">4</span>
-                        <p>¡Listo! El video se descargará</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="extension-promo">
-                <h3>💡 ¿El método automático no funciona?</h3>
-                <p>Usa nuestro Bookmarklet - Funciona con TODOS los videos (públicos y privados)</p>
-                <a href="bookmarklet.html" class="extension-btn" style="display: inline-block; text-decoration: none;">
-                    ⭐ Ver Bookmarklet (1 Click)
+                <a href="javascript:(function(){const videos=document.querySelectorAll('video');if(videos.length===0){alert('❌ No se encontró ningún video en esta página.\\n\\nAsegúrate de estar en una página de Sora con un video.');return;}const video=videos[0];let videoUrl=video.src||video.currentSrc;if(!videoUrl){const sources=video.querySelectorAll('source');if(sources.length>0){videoUrl=sources[0].src;}}if(videoUrl&&!videoUrl.startsWith('blob:')){const a=document.createElement('a');a.href=videoUrl;a.download='sora-video-'+Date.now()+'.mp4';document.body.appendChild(a);a.click();document.body.removeChild(a);alert('✅ ¡Descarga iniciada!\\n\\nEl video se está descargando...');}else{alert('❌ No se pudo obtener la URL del video.\\n\\nIntenta recargar la página de Sora.');}})();" 
+                   class="bookmarklet-btn"
+                   onclick="alert('📌 INSTRUCCIONES:\\n\\n1. ARRASTRA este botón a tu barra de marcadores\\n   (la barra debajo de la barra de direcciones)\\n\\n2. Cuando estés en Sora viendo un video,\\n   haz CLICK en el marcador\\n\\n3. ¡El video se descargará automáticamente!\\n\\n💡 NO hagas click aquí, ARRASTRA el botón.'); return false;">
+                    ⬇️ DESCARGAR VIDEOS DE SORA
                 </a>
+                
+                <p style="margin-top: 20px; font-size: 0.9em; color: #666;">
+                    👆 Arrastra este botón a tu barra de marcadores (NO hagas click)
+                </p>
             </div>
 
-            <div id="extensionInfo" class="extension-info hidden">
-                <h3>📦 Extensión de Chrome</h3>
-                <p>Con la extensión puedes:</p>
-                <ul>
-                    <li>✅ Descargar con un solo click desde Sora</li>
-                    <li>✅ Funciona con TODOS tus videos (públicos y privados)</li>
-                    <li>✅ No necesitas copiar y pegar enlaces</li>
-                    <li>✅ 100% gratis y seguro</li>
-                </ul>
-                <div class="extension-install">
-                    <h4>Instalación (2 minutos):</h4>
-                    <ol>
-                        <li>Descarga la extensión: <a href="extension.zip" download>extension.zip</a></li>
-                        <li>Descomprime el archivo</li>
-                        <li>Abre Chrome y ve a <code>chrome://extensions/</code></li>
-                        <li>Activa "Modo de desarrollador" (arriba a la derecha)</li>
-                        <li>Haz clic en "Cargar extensión sin empaquetar"</li>
-                        <li>Selecciona la carpeta descomprimida</li>
-                        <li>¡Listo! Ve a Sora y verás un botón de descarga</li>
-                    </ol>
+            <!-- INSTRUCCIONES VISUALES -->
+            <div class="instructions-visual">
+                <h3>📋 Cómo usar (3 pasos simples):</h3>
+                
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Arrastra el botón</h4>
+                        <p>Arrastra el botón morado de arriba a tu barra de marcadores</p>
+                        <div class="tip">💡 La barra de marcadores está debajo de la barra de direcciones</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Ve a Sora</h4>
+                        <p>Abre cualquier video en sora.chatgpt.com</p>
+                        <div class="tip">✅ Funciona con videos públicos y privados</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Click y descarga</h4>
+                        <p>Haz click en el marcador que agregaste</p>
+                        <div class="tip">🎉 ¡El video se descarga automáticamente!</div>
+                    </div>
                 </div>
             </div>
+
+            <!-- VENTAJAS -->
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">✅</div>
+                    <h4>100% Gratis</h4>
+                    <p>Sin pagos ni suscripciones</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚀</div>
+                    <h4>Súper Rápido</h4>
+                    <p>Descarga en 1 solo click</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔓</div>
+                    <h4>Todos los Videos</h4>
+                    <p>Públicos y privados</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💻</div>
+                    <h4>Sin Instalar</h4>
+                    <p>No requiere extensiones</p>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="faq-section">
+                <h3>❓ Preguntas Frecuentes</h3>
+                
+                <details class="faq-item">
+                    <summary>¿Cómo muestro la barra de marcadores?</summary>
+                    <div class="faq-content">
+                        <p><strong>Chrome/Edge:</strong> Presiona Ctrl+Shift+B (Windows) o Cmd+Shift+B (Mac)</p>
+                        <p><strong>Firefox:</strong> Presiona Ctrl+B o ve a Ver → Barras de herramientas → Barra de marcadores</p>
+                        <p><strong>Safari:</strong> Presiona Cmd+Shift+B</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>¿Funciona con videos privados de mi cuenta?</summary>
+                    <div class="faq-content">
+                        <p>✅ ¡Sí! Funciona con TODOS los videos que puedas ver en tu navegador, tanto públicos como privados de tu cuenta.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>¿Es seguro?</summary>
+                    <div class="faq-content">
+                        <p>✅ Totalmente seguro. El bookmarklet solo extrae el video que ya estás viendo en tu navegador. No envía datos a ningún servidor externo.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>¿Funciona en móvil?</summary>
+                    <div class="faq-content">
+                        <p>El bookmarklet funciona mejor en computadoras. Para móvil, recomendamos usar el navegador de escritorio o descargar desde la computadora.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- VIDEO TUTORIAL (OPCIONAL) -->
+            <div class="tutorial-box">
+                <h3>🎬 ¿Necesitas ayuda visual?</h3>
+                <p>Si tienes problemas, aquí hay un tutorial paso a paso:</p>
+                <ol style="text-align: left; max-width: 600px; margin: 20px auto; line-height: 1.8;">
+                    <li>Asegúrate de que tu barra de marcadores esté visible (Ctrl+Shift+B)</li>
+                    <li>Haz click y MANTÉN presionado el botón morado de arriba</li>
+                    <li>ARRASTRA el botón hacia tu barra de marcadores</li>
+                    <li>Suelta el botón cuando esté sobre la barra de marcadores</li>
+                    <li>Verás que se agregó un nuevo marcador llamado "DESCARGAR VIDEOS DE SORA"</li>
+                    <li>Ve a sora.chatgpt.com y abre cualquier video</li>
+                    <li>Haz click en el marcador que acabas de agregar</li>
+                    <li>¡El video se descargará automáticamente!</li>
+                </ol>
+            </div>
+
         </main>
 
         <footer>
-            <p>🎬 Descargador de Videos Sora - 100% Gratis</p>
-            <p style="font-size: 0.8em; margin-top: 10px; color: #999;">
-                Sin límites • Sin registro • Sin pagos
+            <p>🎬 Descargador de Videos Sora</p>
+            <p style="font-size: 0.85em; margin-top: 10px; color: #999;">
+                100% Gratis • Sin Límites • Sin Registro
+            </p>
+            <p style="font-size: 0.75em; margin-top: 15px; color: #aaa;">
+                Esta herramienta es gratuita y de código abierto. No almacenamos ningún dato.
             </p>
         </footer>
     </div>

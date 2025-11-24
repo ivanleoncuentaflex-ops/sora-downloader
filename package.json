@@ -1,11 +1,11 @@
 {
   "name": "sora-video-downloader",
-  "version": "12.0.0",
-  "description": "Descargador automático de videos de Sora con Cloudflare bypass",
-  "main": "server-cloudflare.js",
+  "version": "13.0.0",
+  "description": "Descargador de videos de Sora - Autenticación del navegador",
+  "main": "server-final.js",
   "scripts": {
-    "start": "node server-cloudflare.js",
-    "dev": "nodemon server-cloudflare.js"
+    "start": "node server-final.js",
+    "dev": "nodemon server-final.js"
   },
   "keywords": [
     "sora",

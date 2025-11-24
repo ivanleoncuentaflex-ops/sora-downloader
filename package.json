@@ -1,11 +1,11 @@
 {
   "name": "sora-video-downloader",
-  "version": "13.0.0",
-  "description": "Descargador de videos de Sora - Autenticación del navegador",
-  "main": "server-final.js",
+  "version": "14.0.0",
+  "description": "Descargador de videos de Sora - Verificación automática de Cloudflare",
+  "main": "server-auto.js",
   "scripts": {
-    "start": "node server-final.js",
-    "dev": "nodemon server-final.js"
+    "start": "node server-auto.js",
+    "dev": "nodemon server-auto.js"
   },
   "keywords": [
     "sora",

@@ -3,173 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descargador de Videos Sora - 100% Gratis</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Descargador de Videos Sora - Gratis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        
+        .status.show {
+            display: block;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .info-box h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .info-box p {
+            color: #666;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+        
+        .steps {
+            margin-top: 15px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .step-num {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #999;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🎥 Descargador de Videos Sora</h1>
-            <p>100% Gratis • Funciona con TODOS los videos</p>
-        </header>
-
-        <main>
-            <!-- MÉTODO PRINCIPAL: BOOKMARKLET -->
-            <div class="hero-box">
-                <h2>⭐ Descarga en 1 Click</h2>
-                <p style="font-size: 1.1em; margin: 15px 0;">
-                    Arrastra este botón a tu barra de marcadores y descarga cualquier video de Sora con un solo click
-                </p>
-                
-                <a href="javascript:(function(){const videos=document.querySelectorAll('video');if(videos.length===0){alert('❌ No se encontró ningún video en esta página.\\n\\nAsegúrate de estar en una página de Sora con un video.');return;}const video=videos[0];let videoUrl=video.src||video.currentSrc;if(!videoUrl){const sources=video.querySelectorAll('source');if(sources.length>0){videoUrl=sources[0].src;}}if(videoUrl&&!videoUrl.startsWith('blob:')){const a=document.createElement('a');a.href=videoUrl;a.download='sora-video-'+Date.now()+'.mp4';document.body.appendChild(a);a.click();document.body.removeChild(a);alert('✅ ¡Descarga iniciada!\\n\\nEl video se está descargando...');}else{alert('❌ No se pudo obtener la URL del video.\\n\\nIntenta recargar la página de Sora.');}})();" 
-                   class="bookmarklet-btn"
-                   onclick="alert('📌 INSTRUCCIONES:\\n\\n1. ARRASTRA este botón a tu barra de marcadores\\n   (la barra debajo de la barra de direcciones)\\n\\n2. Cuando estés en Sora viendo un video,\\n   haz CLICK en el marcador\\n\\n3. ¡El video se descargará automáticamente!\\n\\n💡 NO hagas click aquí, ARRASTRA el botón.'); return false;">
-                    ⬇️ DESCARGAR VIDEOS DE SORA
-                </a>
-                
-                <p style="margin-top: 20px; font-size: 0.9em; color: #666;">
-                    👆 Arrastra este botón a tu barra de marcadores (NO hagas click)
-                </p>
-            </div>
-
-            <!-- INSTRUCCIONES VISUALES -->
-            <div class="instructions-visual">
-                <h3>📋 Cómo usar (3 pasos simples):</h3>
-                
-                <div class="steps-grid">
-                    <div class="step-card">
-                        <div class="step-number">1</div>
-                        <h4>Arrastra el botón</h4>
-                        <p>Arrastra el botón morado de arriba a tu barra de marcadores</p>
-                        <div class="tip">💡 La barra de marcadores está debajo de la barra de direcciones</div>
-                    </div>
-                    
-                    <div class="step-card">
-                        <div class="step-number">2</div>
-                        <h4>Ve a Sora</h4>
-                        <p>Abre cualquier video en sora.chatgpt.com</p>
-                        <div class="tip">✅ Funciona con videos públicos y privados</div>
-                    </div>
-                    
-                    <div class="step-card">
-                        <div class="step-number">3</div>
-                        <h4>Click y descarga</h4>
-                        <p>Haz click en el marcador que agregaste</p>
-                        <div class="tip">🎉 ¡El video se descarga automáticamente!</div>
-                    </div>
+        <h1>🎥 Descargador de Sora</h1>
+        <p class="subtitle">Pega el link y descarga gratis</p>
+        
+        <div class="input-group">
+            <input 
+                type="text" 
+                id="videoUrl" 
+                placeholder="https://sora.chatgpt.com/p/..."
+                autocomplete="off"
+            >
+        </div>
+        
+        <button id="downloadBtn">⬇️ Descargar Video</button>
+        
+        <div id="status" class="status"></div>
+        
+        <div class="info-box">
+            <h3>📋 Cómo usar:</h3>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <p>Copia el enlace del video de Sora</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <p>Pégalo en el campo de arriba</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <p>Haz click en "Descargar Video"</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">4</span>
+                    <p>¡Espera y el video se descargará!</p>
                 </div>
             </div>
-
-            <!-- VENTAJAS -->
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">✅</div>
-                    <h4>100% Gratis</h4>
-                    <p>Sin pagos ni suscripciones</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🚀</div>
-                    <h4>Súper Rápido</h4>
-                    <p>Descarga en 1 solo click</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🔓</div>
-                    <h4>Todos los Videos</h4>
-                    <p>Públicos y privados</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">💻</div>
-                    <h4>Sin Instalar</h4>
-                    <p>No requiere extensiones</p>
-                </div>
-            </div>
-
-            <!-- FAQ -->
-            <div class="faq-section">
-                <h3>❓ Preguntas Frecuentes</h3>
-                
-                <details class="faq-item">
-                    <summary>¿Cómo muestro la barra de marcadores?</summary>
-                    <div class="faq-content">
-                        <p><strong>Chrome/Edge:</strong> Presiona Ctrl+Shift+B (Windows) o Cmd+Shift+B (Mac)</p>
-                        <p><strong>Firefox:</strong> Presiona Ctrl+B o ve a Ver → Barras de herramientas → Barra de marcadores</p>
-                        <p><strong>Safari:</strong> Presiona Cmd+Shift+B</p>
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>¿Funciona con videos privados de mi cuenta?</summary>
-                    <div class="faq-content">
-                        <p>✅ ¡Sí! Funciona con TODOS los videos que puedas ver en tu navegador, tanto públicos como privados de tu cuenta.</p>
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>¿Es seguro?</summary>
-                    <div class="faq-content">
-                        <p>✅ Totalmente seguro. El bookmarklet solo extrae el video que ya estás viendo en tu navegador. No envía datos a ningún servidor externo.</p>
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>¿Funciona en móvil?</summary>
-                    <div class="faq-content">
-                        <p><strong>Sí, pero de forma diferente:</strong></p>
-                        <p>📱 <strong>En móvil:</strong> Mantén presionado el video y selecciona "Descargar video". Si no aparece, activa "Modo escritorio" en Chrome.</p>
-                        <p>💻 <strong>En computadora:</strong> Usa el bookmarklet (botón morado de arriba) para descargar con 1 click.</p>
-                    </div>
-                </details>
-            </div>
-
-            <!-- MÉTODO PARA MÓVILES -->
-            <div class="tutorial-box" style="background: #e3f2fd;">
-                <h3>📱 ¿Estás en móvil?</h3>
-                <p style="color: #1565c0;">Los bookmarklets no funcionan bien en móviles. Usa este método:</p>
-                
-                <div style="background: white; padding: 20px; border-radius: 10px; margin: 20px auto; max-width: 600px; text-align: left;">
-                    <h4 style="color: #1565c0; margin-bottom: 15px;">Método Manual para Móvil:</h4>
-                    <ol style="line-height: 1.8; color: #333;">
-                        <li>Abre el video de Sora en tu navegador móvil</li>
-                        <li>Mantén presionado sobre el video</li>
-                        <li>Selecciona "Descargar video" o "Guardar video"</li>
-                        <li>¡Listo! El video se guardará en tu galería</li>
-                    </ol>
-                    
-                    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                        <p style="color: #856404; margin: 0;"><strong>💡 Alternativa:</strong> Si no aparece la opción de descargar, abre el video en Chrome móvil y activa "Modo escritorio" desde el menú (⋮)</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- VIDEO TUTORIAL (OPCIONAL) -->
-            <div class="tutorial-box">
-                <h3>🎬 Tutorial para Computadora</h3>
-                <p>Pasos detallados para usar el bookmarklet:</p>
-                <ol style="text-align: left; max-width: 600px; margin: 20px auto; line-height: 1.8;">
-                    <li>Asegúrate de que tu barra de marcadores esté visible (Ctrl+Shift+B)</li>
-                    <li>Haz click y MANTÉN presionado el botón morado de arriba</li>
-                    <li>ARRASTRA el botón hacia tu barra de marcadores</li>
-                    <li>Suelta el botón cuando esté sobre la barra de marcadores</li>
-                    <li>Verás que se agregó un nuevo marcador llamado "DESCARGAR VIDEOS DE SORA"</li>
-                    <li>Ve a sora.chatgpt.com y abre cualquier video</li>
-                    <li>Haz click en el marcador que acabas de agregar</li>
-                    <li>¡El video se descargará automáticamente!</li>
-                </ol>
-            </div>
-
-        </main>
-
+        </div>
+        
         <footer>
-            <p>🎬 Descargador de Videos Sora</p>
-            <p style="font-size: 0.85em; margin-top: 10px; color: #999;">
-                100% Gratis • Sin Límites • Sin Registro
-            </p>
-            <p style="font-size: 0.75em; margin-top: 15px; color: #aaa;">
-                Esta herramienta es gratuita y de código abierto. No almacenamos ningún dato.
-            </p>
+            100% Gratis • Sin Límites • Sin Registro
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const urlInput = document.getElementById('videoUrl');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const statusDiv = document.getElementById('status');
+
+        downloadBtn.addEventListener('click', handleDownload);
+        
+        urlInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleDownload();
+            }
+        });
+
+        async function handleDownload() {
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                showStatus('Por favor, pega un enlace válido', 'error');
+                return;
+            }
+
+            if (!url.includes('sora.chatgpt.com')) {
+                showStatus('El enlace debe ser de sora.chatgpt.com', 'error');
+                return;
+            }
+
+            downloadBtn.disabled = true;
+            downloadBtn.textContent = 'Procesando...';
+            showStatus('🔍 Buscando el video...', 'info');
+            
+            try {
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: url })
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error || 'Error al descargar');
+                }
+                
+                showStatus('⬇️ Descargando video...', 'info');
+                
+                const blob = await response.blob();
+                const downloadUrl = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = `sora-video-${Date.now()}.mp4`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(downloadUrl);
+                a.remove();
+                
+                showStatus('✅ ¡Video descargado exitosamente!', 'success');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showStatus('❌ ' + error.message, 'error');
+            } finally {
+                downloadBtn.disabled = false;
+                downloadBtn.textContent = '⬇️ Descargar Video';
+            }
+        }
+
+        function showStatus(message, type) {
+            statusDiv.textContent = message;
+            statusDiv.className = 'status show ' + type;
+        }
+    </script>
 </body>
 </html>

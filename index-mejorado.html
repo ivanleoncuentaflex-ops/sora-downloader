@@ -41,6 +41,29 @@
             font-size: 1.1em;
         }
         
+        .auth-notice {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .auth-notice p {
+            color: #1565c0;
+            margin: 5px 0;
+        }
+        
+        .auth-notice a {
+            color: #667eea;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .auth-notice a:hover {
+            text-decoration: underline;
+        }
+        
         input {
             width: 100%;
             padding: 15px 20px;
@@ -153,12 +176,23 @@
             color: #856404;
             margin: 5px 0;
         }
+        
+        .warning-box a {
+            color: #667eea;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🎥 Descargador de Sora</h1>
-        <p class="subtitle">100% Automático - Solo pega el link</p>
+        <p class="subtitle">Descarga videos gratis desde tu navegador</p>
+        
+        <div class="auth-notice">
+            <p><strong>📌 Importante:</strong></p>
+            <p>Debes estar autenticado en <a href="https://sora.chatgpt.com" target="_blank">sora.chatgpt.com</a></p>
+            <p>Abre Sora en otra pestaña, inicia sesión, y vuelve aquí</p>
+        </div>
         
         <input 
             type="text" 
@@ -173,32 +207,31 @@
         
         <div id="warningBox" class="warning-box">
             <p><strong>⚠️ No se pudo descargar</strong></p>
-            <p>El video puede estar protegido o el enlace es incorrecto.</p>
+            <p>El video requiere autenticación de ChatGPT.</p>
             <p style="margin-top: 10px;"><strong>Soluciones:</strong></p>
-            <p>1. Verifica que el enlace sea correcto</p>
-            <p>2. Intenta con otro video de Sora</p>
-            <p>3. Si el problema persiste, descarga manualmente:</p>
-            <p style="margin-left: 15px;">• Abre el video en Sora</p>
-            <p style="margin-left: 15px;">• Click derecho → "Guardar video como..."</p>
+            <p><strong>Opción 1:</strong> Abre <a href="https://sora.chatgpt.com" target="_blank">sora.chatgpt.com</a>, inicia sesión, y vuelve a intentar</p>
+            <p><strong>Opción 2:</strong> Descarga manualmente:</p>
+            <p>• Abre el video en Sora</p>
+            <p>• Click derecho → "Guardar video como..."</p>
         </div>
         
         <div class="info-box">
             <h3>📋 Cómo usar:</h3>
             <div class="step">
                 <span class="step-num">1</span>
-                <p>Copia el enlace del video de Sora</p>
+                <p>Inicia sesión en sora.chatgpt.com</p>
             </div>
             <div class="step">
                 <span class="step-num">2</span>
-                <p>Pégalo arriba</p>
+                <p>Copia el enlace del video</p>
             </div>
             <div class="step">
                 <span class="step-num">3</span>
-                <p>Click en "Descargar Video"</p>
+                <p>Pégalo arriba y click en "Descargar"</p>
             </div>
             <div class="step">
                 <span class="step-num">4</span>
-                <p>¡El video se descargará!</p>
+                <p>¡El video se descargará automáticamente!</p>
             </div>
         </div>
         
@@ -237,34 +270,58 @@
             downloadBtn.disabled = true;
             downloadBtn.textContent = 'Procesando...';
             warningBox.classList.remove('show');
-            showStatus('🔍 Extrayendo video desde tu navegador...\nEsto puede tomar unos segundos', 'info');
+            showStatus('🔍 Extrayendo video...\nEsto puede tomar unos segundos', 'info');
             
             try {
-                // Enviar al servidor para procesamiento automático
-                showStatus('🤖 Procesando automáticamente...\nEsto puede tomar 20-40 segundos', 'info');
+                // Método 1: Intentar desde el navegador (funciona si está autenticado)
+                showStatus('📄 Accediendo a la página...', 'info');
                 
-                const response = await fetch('/api/download', {
-                    method: 'POST',
+                const response = await fetch(url, {
+                    method: 'GET',
+                    credentials: 'include',
                     headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ url: url })
+                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                    }
                 });
                 
                 if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.error || 'Error al descargar');
+                    throw new Error('AUTH_REQUIRED');
                 }
                 
-                showStatus('⬇️ Descargando video...\nPor favor espera', 'info');
+                const html = await response.text();
                 
-                const blob = await response.blob();
+                // Verificar si requiere autenticación
+                if (html.includes('Sign in') || html.includes('Log in') || html.length < 5000) {
+                    throw new Error('AUTH_REQUIRED');
+                }
+                
+                showStatus('🔍 Buscando video...', 'info');
+                
+                const videoUrl = extractVideoUrl(html);
+                
+                if (!videoUrl) {
+                    throw new Error('NO_VIDEO_FOUND');
+                }
+                
+                console.log('Video encontrado:', videoUrl);
+                showStatus('⬇️ Descargando video...', 'info');
+                
+                // Descargar el video
+                const videoResponse = await fetch(videoUrl, {
+                    credentials: 'include'
+                });
+                
+                if (!videoResponse.ok) {
+                    throw new Error('AUTH_REQUIRED');
+                }
+                
+                const blob = await videoResponse.blob();
                 
                 if (blob.size < 1000) {
-                    throw new Error('El video no se pudo descargar. Verifica el enlace.');
+                    throw new Error('AUTH_REQUIRED');
                 }
                 
-                // Descargar automáticamente
+                // Descargar
                 const downloadUrl = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = downloadUrl;
@@ -278,12 +335,53 @@
                 
             } catch (error) {
                 console.error('Error:', error);
-                showStatus('❌ ' + error.message, 'error');
-                warningBox.classList.add('show');
+                
+                if (error.message === 'AUTH_REQUIRED') {
+                    showStatus('❌ Requiere autenticación', 'error');
+                    warningBox.classList.add('show');
+                } else if (error.message === 'NO_VIDEO_FOUND') {
+                    showStatus('❌ No se encontró el video en la página', 'error');
+                } else {
+                    showStatus('❌ ' + error.message, 'error');
+                    warningBox.classList.add('show');
+                }
             } finally {
                 downloadBtn.disabled = false;
                 downloadBtn.textContent = '⬇️ Descargar Video';
             }
+        }
+
+        function extractVideoUrl(html) {
+            const patterns = [
+                /https:\/\/videos\.openai\.com\/[a-zA-Z0-9\-_\/\.%\?&=]+\.mp4/gi,
+                /https:\/\/[a-zA-Z0-9\-]+\.blob\.core\.windows\.net\/[^"'\s]+\.mp4/gi,
+                /"(?:videoUrl|video_url|url|src|video|downloadUrl)":\s*"(https?:\/\/[^"]+\.mp4[^"]*)"/gi,
+                /(?:src|href|data-url)=["'](https?:\/\/[^"']+\.mp4[^"']*)["']/gi,
+                /https?:\/\/[^\s"'<>]+\.mp4[^\s"'<>]*/gi
+            ];
+            
+            for (const pattern of patterns) {
+                const matches = [...html.matchAll(pattern)];
+                for (const match of matches) {
+                    let videoUrl = match[1] || match[0];
+                    videoUrl = videoUrl
+                        .replace(/\\"/g, '')
+                        .replace(/\\/g, '')
+                        .replace(/&amp;/g, '&')
+                        .trim();
+                    
+                    if (videoUrl && 
+                        videoUrl.startsWith('http') && 
+                        !videoUrl.includes('thumbnail') && 
+                        !videoUrl.includes('preview') &&
+                        !videoUrl.includes('.jpg') &&
+                        !videoUrl.includes('.png')) {
+                        return videoUrl;
+                    }
+                }
+            }
+            
+            return null;
         }
 
         function showStatus(message, type) {

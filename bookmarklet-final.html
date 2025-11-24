@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sora Video Downloader - Bookmarklet</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+        
+        .alert {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .alert h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .alert p {
+            color: #856404;
+            line-height: 1.6;
+        }
+        
+        .bookmarklet-box {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .bookmarklet-box h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .bookmarklet-link {
+            display: inline-block;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: transform 0.2s;
+        }
+        
+        .bookmarklet-link:hover {
+            transform: translateY(-3px);
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .instructions h3 {
+            color: #1565c0;
+            margin-bottom: 20px;
+        }
+        
+        .step {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .step-num {
+            display: inline-block;
+            background: #2196f3;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .step-content {
+            display: inline-block;
+            vertical-align: middle;
+            width: calc(100% - 60px);
+        }
+        
+        .step strong {
+            color: #1565c0;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .step p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .code-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .warning h4 {
+            color: #721c24;
+            margin-bottom: 10px;
+        }
+        
+        .warning p {
+            color: #721c24;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎥 Sora Video Downloader</h1>
+        <p class="subtitle">La ÚNICA solución que realmente funciona</p>
+        
+        <div class="alert">
+            <h3>⚠️ Importante: Por qué los servidores NO funcionan</h3>
+            <p>Los videos de Sora <strong>requieren autenticación de ChatGPT</strong>. No se pueden descargar desde un servidor externo porque el servidor no tiene tus credenciales.</p>
+            <p style="margin-top: 10px;"><strong>Esta es la única solución que funciona:</strong> Un bookmarklet que se ejecuta en tu navegador mientras estás autenticado en Sora.</p>
+        </div>
+        
+        <div class="bookmarklet-box">
+            <h2>📌 Arrastra este botón a tu barra de marcadores:</h2>
+            <a href="javascript:(function(){const html=document.documentElement.innerHTML;const patterns=[/https:\/\/videos\.openai\.com\/[a-zA-Z0-9\-_\/\.%\?&=]+\.mp4/gi,/https:\/\/[a-zA-Z0-9\-]+\.blob\.core\.windows\.net\/[^%22'%5Cs]+\.mp4/gi];let videoUrl=null;for(const pattern of patterns){const match=html.match(pattern);if(match&&match[0]){videoUrl=match[0].replace(/\\\%22/g,'').replace(/\\\\/g,'');break;}}if(!videoUrl){const videos=document.querySelectorAll('video');for(const video of videos){if(video.src&&video.src.includes('.mp4')){videoUrl=video.src;break;}}}if(!videoUrl){alert('❌ No se encontró video en esta página');return;}const btn=document.createElement('button');btn.innerHTML='⬇️ Descargando...';btn.style.cssText='position:fixed;bottom:20px;right:20px;z-index:999999;padding:15px 25px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;border:none;border-radius:10px;font-size:16px;font-weight:bold;box-shadow:0 4px 15px rgba(0,0,0,0.3)';document.body.appendChild(btn);fetch(videoUrl).then(r=>r.blob()).then(blob=>{const url=window.URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`sora-video-${Date.now()}.mp4`;document.body.appendChild(a);a.click();document.body.removeChild(a);window.URL.revokeObjectURL(url);btn.innerHTML='✅ Descargado!';setTimeout(()=>document.body.removeChild(btn),2000);}).catch(err=>{btn.innerHTML='❌ Error';setTimeout(()=>document.body.removeChild(btn),2000);});})();" class="bookmarklet-link">
+                ⬇️ Descargar Video Sora
+            </a>
+            <p style="margin-top: 20px; color: #666;">Arrastra el botón de arriba a tu barra de marcadores</p>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 Instrucciones de Uso</h3>
+            
+            <div class="step">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                    <strong>Instalar el Bookmarklet</strong>
+                    <p>Arrastra el botón "⬇️ Descargar Video Sora" de arriba a tu barra de marcadores. Si no ves la barra, presiona Ctrl+Shift+B (Windows) o Cmd+Shift+B (Mac).</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                    <strong>Ir a Sora</strong>
+                    <p>Ve a <a href="https://sora.chatgpt.com" target="_blank" style="color: #2196f3;">sora.chatgpt.com</a> e inicia sesión con tu cuenta de ChatGPT.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                    <strong>Abrir un Video</strong>
+                    <p>Abre cualquier video de Sora que quieras descargar.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <span class="step-num">4</span>
+                <div class="step-content">
+                    <strong>Usar el Bookmarklet</strong>
+                    <p>Click en el marcador "⬇️ Descargar Video Sora" que agregaste. El video se descargará automáticamente.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="warning">
+            <h4>🔒 Requisitos</h4>
+            <p>• Debes estar autenticado en Sora (con tu cuenta de ChatGPT)</p>
+            <p>• Solo funciona en páginas de sora.chatgpt.com</p>
+            <p>• Funciona con videos públicos y privados (si tienes acceso)</p>
+        </div>
+        
+        <div style="background: #d4edda; padding: 20px; border-radius: 10px; margin: 20px 0;">
+            <h4 style="color: #155724; margin-bottom: 10px;">✅ Ventajas de Este Método</h4>
+            <p style="color: #155724;">✅ Funciona con videos privados (usa tus credenciales)</p>
+            <p style="color: #155724;">✅ Descarga directa (sin servidor intermedio)</p>
+            <p style="color: #155724;">✅ Rápido (5-10 segundos)</p>
+            <p style="color: #155724;">✅ 100% gratis y sin límites</p>
+            <p style="color: #155724;">✅ No requiere instalación de extensiones</p>
+        </div>
+        
+        <footer>
+            <p>100% Gratis • Sin Límites • La Única Solución Real</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">También disponible como extensión de Chrome en la carpeta extension-simple/</p>
+        </footer>
+    </div>
+</body>
+</html>

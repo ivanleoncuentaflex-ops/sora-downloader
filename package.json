@@ -1,11 +1,11 @@
 {
   "name": "sora-video-downloader",
-  "version": "14.0.0",
-  "description": "Descargador de videos de Sora - Verificación automática de Cloudflare",
-  "main": "server-auto.js",
+  "version": "15.0.0",
+  "description": "Sora Video Downloader - Bookmarklet (La única solución real)",
+  "main": "server-bookmarklet.js",
   "scripts": {
-    "start": "node server-auto.js",
-    "dev": "nodemon server-auto.js"
+    "start": "node server-bookmarklet.js",
+    "dev": "nodemon server-bookmarklet.js"
   },
   "keywords": [
     "sora",

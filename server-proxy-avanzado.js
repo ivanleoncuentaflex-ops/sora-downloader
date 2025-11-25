@@ -44,21 +44,46 @@ async function initBrowser() {
         await browserPage.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
         await browserPage.setViewport({ width: 1920, height: 1080 });
         
-        // Ocultar que es un bot
+        // Ocultar que es un bot - MUY IMPORTANTE para pasar Cloudflare
         await browserPage.evaluateOnNewDocument(() => {
+            // Ocultar webdriver
             Object.defineProperty(navigator, 'webdriver', { get: () => false });
-            Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
-            Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en'] });
+            
+            // Simular plugins
+            Object.defineProperty(navigator, 'plugins', { 
+                get: () => [1, 2, 3, 4, 5] 
+            });
+            
+            // Idiomas
+            Object.defineProperty(navigator, 'languages', { 
+                get: () => ['en-US', 'en', 'es'] 
+            });
+            
+            // Chrome específico
+            window.chrome = {
+                runtime: {}
+            };
+            
+            // Permisos
+            const originalQuery = window.navigator.permissions.query;
+            window.navigator.permissions.query = (parameters) => (
+                parameters.name === 'notifications' ?
+                    Promise.resolve({ state: Notification.permission }) :
+                    originalQuery(parameters)
+            );
         });
         
-        // Pre-cargar Sora para establecer sesión
-        console.log('🔐 Pre-cargando Sora...');
+        // Pre-cargar Sora para establecer sesión y pasar Cloudflare
+        console.log('🔐 Pre-cargando Sora y pasando Cloudflare...');
         await browserPage.goto('https://sora.chatgpt.com', {
             waitUntil: 'networkidle0',
-            timeout: 60000
+            timeout: 90000
         });
         
-        console.log('✅ Navegador listo');
+        // Esperar extra para asegurar que Cloudflare pasó
+        await browserPage.waitForTimeout(5000);
+        
+        console.log('✅ Navegador listo y Cloudflare pasado');
     } catch (error) {
         console.error('❌ Error iniciando navegador:', error.message);
     }
@@ -77,7 +102,89 @@ setInterval(async () => {
 }, 60000); // Cada minuto
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index-proxy.html'));
+    res.sendFile(path.join(__dirname, 'index-simple-final.html'));
+});
+
+// Endpoint para previsualización
+app.post('/api/preview', async (req, res) => {
+    const { url, cookies } = req.body;
+    
+    if (!url || !url.includes('sora.chatgpt.com')) {
+        return res.status(400).json({ 
+            success: false,
+            error: 'URL inválida' 
+        });
+    }
+    
+    console.log('👁️ Solicitud de previsualización:', url);
+    
+    try {
+        if (!browserPage) {
+            await initBrowser();
+        }
+        
+        // Si el usuario proporcionó cookies, usarlas
+        if (cookies) {
+            console.log('🍪 Usando cookies del usuario');
+            await browserPage.setCookie({
+                name: '__Secure-next-auth.session-token',
+                value: cookies,
+                domain: '.chatgpt.com',
+                path: '/',
+                secure: true,
+                httpOnly: true
+            });
+        }
+        
+        await browserPage.goto(url, {
+            waitUntil: 'networkidle2',
+            timeout: 60000
+        });
+        
+        await browserPage.waitForTimeout(3000);
+        
+        const videoUrl = await browserPage.evaluate(() => {
+            const html = document.documentElement.innerHTML;
+            const patterns = [
+                /https:\/\/videos\.openai\.com\/[^"'\s]+\.mp4/gi,
+                /https:\/\/[^"'\s]+\.blob\.core\.windows\.net\/[^"'\s]+\.mp4/gi
+            ];
+            
+            for (const pattern of patterns) {
+                const match = html.match(pattern);
+                if (match && match[0]) {
+                    return match[0].replace(/\\"/g, '').replace(/\\/g, '');
+                }
+            }
+            
+            const videos = document.querySelectorAll('video');
+            for (const video of videos) {
+                if (video.src && video.src.includes('.mp4')) {
+                    return video.src;
+                }
+            }
+            
+            return null;
+        });
+        
+        if (!videoUrl) {
+            throw new Error('No se encontró el video');
+        }
+        
+        console.log('✅ Video encontrado para previsualización');
+        
+        res.json({
+            success: true,
+            videoUrl: videoUrl
+        });
+        
+    } catch (error) {
+        console.error('❌ Error en previsualización:', error.message);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
 });
 
 app.post('/api/download', async (req, res) => {

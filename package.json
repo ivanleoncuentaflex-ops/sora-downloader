@@ -1,7 +1,7 @@
 {
   "name": "sora-video-downloader",
-  "version": "16.0.0",
-  "description": "Sora Video Downloader - Proxy Avanzado con Puppeteer Persistente",
+  "version": "17.0.0",
+  "description": "Sora Video Downloader - SaveSora Style",
   "main": "server-proxy-avanzado.js",
   "scripts": {
     "start": "node server-proxy-avanzado.js",

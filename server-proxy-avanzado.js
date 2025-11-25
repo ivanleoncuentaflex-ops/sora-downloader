@@ -129,7 +129,7 @@ setInterval(async () => {
 }, 60000); // Cada minuto
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index-simple-final.html'));
+    res.sendFile(path.join(__dirname, 'index-savesora-style.html'));
 });
 
 // Endpoint para previsualización

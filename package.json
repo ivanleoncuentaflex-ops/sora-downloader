@@ -1,11 +1,11 @@
 {
   "name": "sora-video-downloader",
-  "version": "15.0.0",
-  "description": "Sora Video Downloader - Bookmarklet (La única solución real)",
-  "main": "server-bookmarklet.js",
+  "version": "16.0.0",
+  "description": "Sora Video Downloader - Proxy Avanzado con Puppeteer Persistente",
+  "main": "server-proxy-avanzado.js",
   "scripts": {
-    "start": "node server-bookmarklet.js",
-    "dev": "nodemon server-bookmarklet.js"
+    "start": "node server-proxy-avanzado.js",
+    "dev": "nodemon server-proxy-avanzado.js"
   },
   "keywords": [
     "sora",

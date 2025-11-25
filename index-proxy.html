@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargador de Videos Sora - Gratis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+            white-space: pre-line;
+        }
+        
+        .status.show { display: block; }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .status.info { background: #d1ecf1; color: #0c5460; }
+        
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .info-box h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .step-num {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .step p {
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #999;
+            font-size: 0.9em;
+        }
+        
+        .note {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .note p {
+            color: #856404;
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎥 Descargador de Sora</h1>
+        <p class="subtitle">Pega el link y descarga - Automático</p>
+        
+        <input 
+            type="text" 
+            id="videoUrl" 
+            placeholder="https://sora.chatgpt.com/p/..."
+            autocomplete="off"
+        >
+        
+        <button id="downloadBtn">⬇️ Descargar Video</button>
+        
+        <div id="status" class="status"></div>
+        
+        <div class="note">
+            <p><strong>📌 Nota:</strong> Este servicio funciona con videos públicos de Sora. Si el video requiere autenticación específica, puede no funcionar.</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>📋 Cómo usar:</h3>
+            <div class="step">
+                <span class="step-num">1</span>
+                <p>Copia el enlace del video de Sora</p>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <p>Pégalo arriba</p>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <p>Click en "Descargar Video"</p>
+            </div>
+            <div class="step">
+                <span class="step-num">4</span>
+                <p>Espera 20-40 segundos</p>
+            </div>
+            <div class="step">
+                <span class="step-num">5</span>
+                <p>¡El video se descargará!</p>
+            </div>
+        </div>
+        
+        <footer>
+            100% Gratis • Sin Límites • Sin Registro
+        </footer>
+    </div>
+
+    <script>
+        const urlInput = document.getElementById('videoUrl');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const statusDiv = document.getElementById('status');
+
+        downloadBtn.addEventListener('click', handleDownload);
+        
+        urlInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleDownload();
+            }
+        });
+
+        async function handleDownload() {
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                showStatus('❌ Por favor, pega un enlace válido', 'error');
+                return;
+            }
+
+            if (!url.includes('sora.chatgpt.com')) {
+                showStatus('❌ El enlace debe ser de sora.chatgpt.com', 'error');
+                return;
+            }
+
+            downloadBtn.disabled = true;
+            downloadBtn.textContent = 'Procesando...';
+            showStatus('🤖 Procesando con navegador automatizado...\nEsto puede tomar 20-40 segundos', 'info');
+            
+            try {
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: url })
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error || 'Error al descargar');
+                }
+                
+                showStatus('⬇️ Descargando video...\nPor favor espera', 'info');
+                
+                const blob = await response.blob();
+                
+                if (blob.size < 1000) {
+                    throw new Error('El video no se pudo descargar. Puede requerir autenticación específica.');
+                }
+                
+                // Descargar automáticamente
+                const downloadUrl = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = `sora-video-${Date.now()}.mp4`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(downloadUrl);
+                a.remove();
+                
+                showStatus('✅ ¡Video descargado exitosamente!', 'success');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showStatus('❌ ' + error.message + '\n\nSi el video es privado, intenta con un video público.', 'error');
+            } finally {
+                downloadBtn.disabled = false;
+                downloadBtn.textContent = '⬇️ Descargar Video';
+            }
+        }
+
+        function showStatus(message, type) {
+            statusDiv.textContent = message;
+            statusDiv.className = 'status show ' + type;
+        }
+    </script>
+</body>
+</html>

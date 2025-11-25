@@ -255,33 +255,82 @@ app.post('/api/download', async (req, res) => {
             console.log('⚠️ Continuando sin esperar Cloudflare');
         }
         
-        // Esperar a que cargue el contenido
-        await browserPage.waitForTimeout(5000);
+        // Esperar a que aparezca el elemento video
+        console.log('⏳ Esperando a que el video cargue...');
+        try {
+            await browserPage.waitForSelector('video', { timeout: 30000 });
+            console.log('✅ Elemento video encontrado');
+        } catch (error) {
+            console.log('⚠️ No se encontró elemento video, intentando con HTML');
+        }
+        
+        // Esperar extra para que cargue completamente
+        await browserPage.waitForTimeout(8000);
         
         console.log('🎥 Extrayendo URL del video...');
         
-        // Extraer URL del video
+        // Extraer URL del video con múltiples métodos
         const videoUrl = await browserPage.evaluate(() => {
-            const html = document.documentElement.innerHTML;
-            
-            // Patrones para encontrar el video
-            const patterns = [
-                /https:\/\/videos\.openai\.com\/[^"'\s]+\.mp4/gi,
-                /https:\/\/[^"'\s]+\.blob\.core\.windows\.net\/[^"'\s]+\.mp4/gi
-            ];
-            
-            for (const pattern of patterns) {
-                const match = html.match(pattern);
-                if (match && match[0]) {
-                    return match[0].replace(/\\"/g, '').replace(/\\/g, '');
-                }
-            }
-            
-            // Buscar en elementos video
+            // Método 1: Buscar en elementos video
             const videos = document.querySelectorAll('video');
             for (const video of videos) {
                 if (video.src && video.src.includes('.mp4')) {
+                    console.log('Video encontrado en elemento:', video.src);
                     return video.src;
+                }
+                // Buscar en source dentro del video
+                const sources = video.querySelectorAll('source');
+                for (const source of sources) {
+                    if (source.src && source.src.includes('.mp4')) {
+                        console.log('Video encontrado en source:', source.src);
+                        return source.src;
+                    }
+                }
+            }
+            
+            // Método 2: Buscar en el HTML completo
+            const html = document.documentElement.innerHTML;
+            
+            const patterns = [
+                // OpenAI videos
+                /https:\/\/videos\.openai\.com\/[^"'\s<>]+\.mp4[^"'\s<>]*/gi,
+                // Azure blob
+                /https:\/\/[^"'\s<>]+\.blob\.core\.windows\.net\/[^"'\s<>]+\.mp4[^"'\s<>]*/gi,
+                // Cualquier MP4
+                /https?:\/\/[^"'\s<>]+\.mp4[^"'\s<>]*/gi
+            ];
+            
+            for (const pattern of patterns) {
+                const matches = html.match(pattern);
+                if (matches && matches.length > 0) {
+                    for (const match of matches) {
+                        let cleanUrl = match
+                            .replace(/\\"/g, '')
+                            .replace(/\\/g, '')
+                            .replace(/&amp;/g, '&')
+                            .replace(/&quot;/g, '')
+                            .trim();
+                        
+                        // Validar que no sea thumbnail
+                        if (!cleanUrl.includes('thumbnail') && 
+                            !cleanUrl.includes('preview') &&
+                            !cleanUrl.includes('.jpg') &&
+                            !cleanUrl.includes('.png')) {
+                            console.log('Video encontrado en HTML:', cleanUrl);
+                            return cleanUrl;
+                        }
+                    }
+                }
+            }
+            
+            // Método 3: Buscar en scripts y JSON
+            const scripts = document.querySelectorAll('script');
+            for (const script of scripts) {
+                const content = script.textContent || script.innerHTML;
+                const videoMatch = content.match(/https:\/\/videos\.openai\.com\/[^"'\s]+\.mp4/);
+                if (videoMatch) {
+                    console.log('Video encontrado en script:', videoMatch[0]);
+                    return videoMatch[0];
                 }
             }
             

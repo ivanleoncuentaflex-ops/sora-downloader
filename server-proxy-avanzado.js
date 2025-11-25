@@ -75,15 +75,42 @@ async function initBrowser() {
         
         // Pre-cargar Sora para establecer sesión y pasar Cloudflare
         console.log('🔐 Pre-cargando Sora y pasando Cloudflare...');
+        
         await browserPage.goto('https://sora.chatgpt.com', {
-            waitUntil: 'networkidle0',
+            waitUntil: 'domcontentloaded',
             timeout: 90000
         });
         
-        // Esperar extra para asegurar que Cloudflare pasó
+        // Esperar a que Cloudflare termine (detectar cuando desaparece el challenge)
+        console.log('⏳ Esperando a que Cloudflare termine...');
+        
+        try {
+            // Esperar hasta que NO haya elementos de Cloudflare challenge
+            await browserPage.waitForFunction(() => {
+                const body = document.body.innerHTML;
+                // Si no contiene textos típicos de Cloudflare, asumimos que pasó
+                return !body.includes('Checking your browser') && 
+                       !body.includes('Just a moment') &&
+                       !body.includes('cf-challenge') &&
+                       !body.includes('cf_chl') &&
+                       document.readyState === 'complete';
+            }, { timeout: 30000 });
+            
+            console.log('✅ Cloudflare challenge completado');
+        } catch (error) {
+            console.log('⚠️ Timeout esperando Cloudflare, continuando...');
+        }
+        
+        // Esperar extra para asegurar que todo cargó
         await browserPage.waitForTimeout(5000);
         
-        console.log('✅ Navegador listo y Cloudflare pasado');
+        // Verificar que la página cargó correctamente
+        const pageContent = await browserPage.content();
+        if (pageContent.length > 10000) {
+            console.log('✅ Navegador listo y Cloudflare pasado');
+        } else {
+            console.log('⚠️ Página puede no haber cargado completamente');
+        }
     } catch (error) {
         console.error('❌ Error iniciando navegador:', error.message);
     }
@@ -209,12 +236,27 @@ app.post('/api/download', async (req, res) => {
         
         // Navegar al video
         await browserPage.goto(url, {
-            waitUntil: 'networkidle2',
+            waitUntil: 'domcontentloaded',
             timeout: 60000
         });
         
-        // Esperar a que cargue
-        await browserPage.waitForTimeout(3000);
+        // Esperar a que Cloudflare termine si aparece
+        console.log('🔐 Verificando Cloudflare...');
+        try {
+            await browserPage.waitForFunction(() => {
+                const body = document.body.innerHTML;
+                return !body.includes('Checking your browser') && 
+                       !body.includes('Just a moment') &&
+                       !body.includes('cf-challenge') &&
+                       document.readyState === 'complete';
+            }, { timeout: 15000 });
+            console.log('✅ Cloudflare OK');
+        } catch (error) {
+            console.log('⚠️ Continuando sin esperar Cloudflare');
+        }
+        
+        // Esperar a que cargue el contenido
+        await browserPage.waitForTimeout(5000);
         
         console.log('🎥 Extrayendo URL del video...');
         
